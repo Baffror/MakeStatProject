@@ -44,13 +44,13 @@ function compteur($currentPath = '..') {
         if($nbFiles) {
             foreach ($filesInDir as $file) {
                 $pathinfo = pathinfo($file);
-                $nbrPage++;
+                
                 //gif, jpg, jpeg, psd, png
                 if ( isset($pathinfo['extension']) && in_array($pathinfo['extension'],$arrayImg) ){
                     $nbrImg++;
                 // php js css html
                 } elseif ( isset($pathinfo['extension']) && in_array($pathinfo['extension'],$arrayFiles) ){
-                    
+                    $nbrPage++;
                     $contenuFichier = file_get_contents($currentPath.'/'.$file);
                     // nbr ligne
                     $nbrLignes += count(file($currentPath.'/'.$file));
@@ -58,6 +58,7 @@ function compteur($currentPath = '..') {
                     $nbrCaractere += strlen($contenuFichier);
 
                 } else {
+                    $nbrPage++;
                     echo 'Non Classé =>'.$currentPath.'/'.$file.'<br />';
                 }
 
